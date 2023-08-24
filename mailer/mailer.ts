@@ -1,10 +1,13 @@
 import  nodemailer  from "nodemailer";
 
-//configuracion del trasposter
-//recordar crear el correo con validacion en 2 pasos
+//configuración del trasporter
+//recordar crear el correo con validación en 2 pasos
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
+    tls:{
+        rejectUnauthorized: false
+    },
     auth:{
         user: "tiendaprueba133@gmail.com",
         pass: "jilsyulvbhdaesbs"
@@ -19,11 +22,10 @@ const transporter = nodemailer.createTransport({
 export const sendEmail = async(to: string, code: string ):Promise<void> => {
     try {
         const mailOptions={
-            from: `"tienda" tiendaprueba133@gmail.com `,
+            from: `"tienda prueba" <tiendaprueba133@gmail.com>`,
             to,
             subject: "Código de verificación para tu cuenta",
-            Text: `Llego tu código para tienda. 
-                  Tu código para verificarse es: ${code}`
+            text: `Llego tu código para tienda. Tu código para verificarse es: ${code}`, 
             
         }
         
